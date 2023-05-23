@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('payment/tracking', [\App\Http\Controllers\TrackingController::class, 'track'])->name('track');
 Route::get('payment', [\App\Http\Controllers\PaymentController::class, 'getToken'])->name('get_token');
