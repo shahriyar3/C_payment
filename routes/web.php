@@ -33,5 +33,5 @@ Route::prefix('upcadmin')->name('upcadmin.')->middleware('auth')->group(function
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('prices', \App\Http\Controllers\Admin\PriceController::class)->except(['update', 'show', 'edit']);
     Route::resource('payments', \App\Http\Controllers\Admin\PaymentController::class);
-    Route::resource('users', \App\Http\Controllers\Admin\PriceController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 });

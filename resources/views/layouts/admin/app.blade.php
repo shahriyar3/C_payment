@@ -11,6 +11,7 @@
 
     <title>Payment system</title>
 
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/admin/admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -19,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/admin/admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    @livewireStyles
 
 </head>
 
@@ -32,6 +34,9 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('upcadmin.payments.index') }}">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
             <div class="sidebar-brand-text mx-3">Payment Admin </div>
         </a>
 
@@ -183,13 +188,8 @@
 <!-- Custom scripts for all pages-->
 <script src="{{ asset('assets/admin/admin/js/sb-admin-2.min.js') }}"></script>
 
-<!-- Page level plugins -->
-<script src="{{ asset('assets/admin/admin/vendor/chart.js/Chart.min.js') }}"></script>
 
-<!-- Page level custom scripts -->
-<script src="{{ asset('assets/admin/admin/js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ asset('assets/admin/admin/js/demo/chart-pie-demo.js') }}"></script>
-
+@livewireStyles
 </body>
 
 </html>

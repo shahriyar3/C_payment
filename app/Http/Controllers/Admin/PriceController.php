@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StorePriceRequest;
 use App\Models\Price;
-use Illuminate\Http\Request;
 
 class PriceController extends Controller
 {
     public function index()
     {
-        $prices = Price::query()->get();
-        return view('admin.prices.index', compact('prices'));
+        return view('admin.prices.index');
     }
 
     public function create()
@@ -19,28 +18,16 @@ class PriceController extends Controller
         return view('admin.prices.create');
     }
 
-    public function store( $request)
+    public function store(StorePriceRequest $request)
     {
-
+        Price::query()->create($request->validated());
+        return redirect()->to(route('upcadmin.prices.index'));
     }
 
-    public function show(string $id)
+    public function destroy(Price $price)
     {
-        //
-    }
+        $price->delete();
+        return redirect()->to(route('upcadmin.prices.index'));
 
-   public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
     }
 }
