@@ -13,11 +13,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
          \App\Models\User::factory()->create();
-         \App\Models\Price::factory()->count(5)->create();
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            PriceSeeder::class,
+        ]);
     }
 }

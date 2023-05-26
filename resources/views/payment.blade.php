@@ -211,7 +211,7 @@
                         @csrf
                         <input type="hidden" name="payment_id" value="{{ $payment->payment_id }}" readonly>
                         <div class="col-md-12">
-                            <input class="form-control" type="text" name="name" value="{{ $payment->user_name }}" readonly disabled>
+                            <input class="form-control" type="text" name="name" value="{{ $payment->user_id }}" readonly disabled>
                             <div class="valid-feedback">Username field is valid!</div>
                             <div class="invalid-feedback">Username field cannot be blank!</div>
                         </div>

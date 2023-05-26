@@ -13,6 +13,13 @@ class VerifyController extends Controller
     {
         $payment = Payment::query()->where('transaction_id', '=', \request('payId'))->first();
 
+        if (!request()->has('status') or request('status') != '1') {
+            $payment->update([
+                'status' => 'failed'
+            ]);
+            return redirect()->route('alert', ['text' => 'gateway_error']);
+        }
+
         $token = app(PaymentAuthenticationService::class)->handle();
         if (!$token) {
             $payment->update([
@@ -26,14 +33,14 @@ class VerifyController extends Controller
             $payment->update([
                 'status' => 'failed'
             ]);
-
             return redirect()->route('alert', ['text' => 'error']);
         }
 
         $payment->update([
-            'status' => strtolower($response->status)
+            'status' => strtolower($response->status),
+            'result' => (array)$response
         ]);
         $listener = app(PaymentDepositListenerService::class)->handle($payment);
-        return redirect()->route('alert', ['text' => strtolower($response->status), 'token' => $payment->transaction_id]);
+        return redirect()->route('alert', ['text' => strtolower($response->status), 'token' => $payment->payment_id]);
     }
 }

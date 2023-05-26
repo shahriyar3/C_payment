@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('status', ['failed', 'success', 'pending'])->default('pending')->index();
             $table->string('user_ip')->nullable();
             $table->string('user_agent')->nullable();
+            $table->json('result')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

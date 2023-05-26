@@ -208,6 +208,7 @@
                             @if(!empty($success))
                                 <div class="alert alert-success">
                                     <p class="text-black-50">{!! trans('message.' . $success) !!}</p>
+                                    <p class="text-black-50">Your tracking code: {{ $payment_id }} </p>
                                 </div>
                             @endif
 

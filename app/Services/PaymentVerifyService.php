@@ -18,12 +18,12 @@ class PaymentVerifyService
                     ],
                 ]
             );
-            if ($response->getStatusCode() != 200 or $response->getStatusCode() != 201) {
-                return false;
-            }
 
             $body = $response->getBody();
             $result = json_decode((string)$body);
+            if ($result?->data?->status != 'SUCCESS')
+                return false;
+
             return $result->data;
 
         } catch (\Throwable $exception) {
