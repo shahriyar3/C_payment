@@ -10,7 +10,7 @@ class PaymentDepositListenerService
             $client = new \GuzzleHttp\Client();
 
             $response = $client->post(
-                env('SERVER_HOST_URL') . 'v1/deposit_api_listener',
+                config('payment.return_url') . 'v1/deposit_api_listener',
                 [
                     'headers' => [
                         'Content-Type' => 'application/json',
