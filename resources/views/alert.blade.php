@@ -244,7 +244,7 @@
                         </div>
 
                         <div class="form-button mt-3">
-                            <a href="{{ env('SERVER_HOST_URL') }}" id="submit" type="submit" class="btn btn-primary">return to site</a>
+                            <a href="{{ config('payment.return_url') }}" id="submit" type="submit" class="btn btn-primary">return to site</a>
                         </div>
                     </form>
                 </div>
