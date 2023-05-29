@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('artisan-call', function () {
-    \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed');
+//    \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed');
 //    \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
 //    \Illuminate\Support\Facades\Artisan::call('storage:link');
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
