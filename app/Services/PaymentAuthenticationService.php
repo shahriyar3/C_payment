@@ -9,7 +9,7 @@ class PaymentAuthenticationService
         try {
             $client = new \GuzzleHttp\Client();
             $response = $client->post(
-                'https://panel.kenzopayment.com/api/auth/login',
+                config('payment.gateway_url') . 'api/auth/login',
                 [
                     'headers' => [
                         'Content-Type' => 'application/json',

@@ -9,7 +9,7 @@ class PaymentVerifyService
         try {
             $client = new \GuzzleHttp\Client();
             $response = $client->get(
-                'https://panel.kenzopayment.com/api/shops/payments/' . request('payId') . '/verify',
+                config('payment.gateway_url') . 'api/shops/payments/' . request('payId') . '/verify',
                 [
                     'headers' => [
                         'Authorization' => 'Bearer ' . $token,

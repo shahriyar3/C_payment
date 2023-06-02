@@ -9,7 +9,7 @@ class PaymentCreateService
         try {
             $client = new \GuzzleHttp\Client();
             $response = $client->post(
-                'https://panel.kenzopayment.com/api/shops/payments',
+                config('payment.gateway_url') . 'api/shops/payments',
                 [
                     'headers' => [
                         'Authorization' => 'Bearer ' . $token,
