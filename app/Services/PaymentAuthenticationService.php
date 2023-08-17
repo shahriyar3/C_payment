@@ -18,8 +18,8 @@ class PaymentAuthenticationService
                         'Accept' => 'application/json',
                     ],
                     'json' => [
-                        'access_key' => env('ACCESS_KEY'),
-                        'secret_key' => env('SECRET_KEY'),
+                        'access_key' => config('payment.access_key'),
+                        'secret_key' => config('payment.secret_key'),
                     ],
                 ]
             );
@@ -30,8 +30,8 @@ class PaymentAuthenticationService
             }
             return false;
         } catch (\Throwable $exception) {
-            Log::alert('authentication failed -------------------       ' . env('ACCESS_KEY'));
-            Log::alert('authentication failed -------------------       ' . env('SECRET_KEY'));
+            Log::alert('authentication failed -------------------       ' . config('payment.access_key'));
+            Log::alert('authentication failed -------------------       ' . config('payment.secret_key'));
             return false;
         }
     }

@@ -20,7 +20,7 @@ class PaymentCreateService
                     ],
                     'json' => [
                         'user_id' => (string)$payment->user_id,
-                        'callback_url' => env('PAYMENT_CALLBACK_URL'),
+                        'callback_url' => config('payment.callback_url'),
                         'order_id' => $payment->payment_id,
                         'username' => $payment->user_name,
                         'amount' => $payment->amount,
