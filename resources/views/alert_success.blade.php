@@ -18,7 +18,7 @@
           color="#111"/>
 
 
-    <title>CodePen - Registration Form (Bootstrap 5 Validation)</title>
+    <title>UPC Deposit </title>
 
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css'>
@@ -215,7 +215,7 @@
                         </div>
 
                         <div class="form-button mt-3">
-                            <a href="https://upc-42-upc-dapi-t4.demoenv.dev/" id="submit" type="submit" class="btn btn-primary">return to site</a>
+                            <a href="{{ config('payment.return_url') }}" id="submit" type="submit" class="btn btn-primary">return to site</a>
                         </div>
                     </form>
                 </div>
