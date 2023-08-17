@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Services\PaymentAuthenticationService;
 use App\Services\PaymentDepositListenerService;
 use App\Services\PaymentVerifyService;
+use Illuminate\Support\Facades\Log;
 
 class VerifyController extends Controller
 {
@@ -17,6 +18,7 @@ class VerifyController extends Controller
             $payment->update([
                 'status' => 'failed'
             ]);
+            Log::log('1111111111111111111111111');
             return redirect()->route('alert', ['text' => 'gateway_error']);
         }
 
@@ -25,6 +27,7 @@ class VerifyController extends Controller
             $payment->update([
                 'status' => 'failed'
             ]);
+            Log::log('1111111111111111111111111');
             return redirect()->route('alert', ['text' => 'gateway_error']);
         }
 
