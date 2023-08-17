@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
+
 class PaymentCreateService
 {
     public function handle($payment, $token)
@@ -32,6 +34,7 @@ class PaymentCreateService
             }
             return false;
         } catch (\Throwable $exception) {
+            Log::log('payment not created');
             return false;
         }
     }

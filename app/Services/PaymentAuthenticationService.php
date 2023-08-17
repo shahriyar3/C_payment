@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
+
 class PaymentAuthenticationService
 {
     public function handle()
@@ -28,6 +30,8 @@ class PaymentAuthenticationService
             }
             return false;
         } catch (\Throwable $exception) {
+            Log::log('authentication failed -------------------       ' . env('ACCESS_KEY'));
+            Log::log('authentication failed -------------------       ' . env('SECRET_KEY'));
             return false;
         }
     }
