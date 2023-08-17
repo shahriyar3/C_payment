@@ -34,7 +34,7 @@ class PaymentCreateService
             }
             return false;
         } catch (\Throwable $exception) {
-            Log::log('payment not created');
+            Log::alert('payment not created');
             return false;
         }
     }

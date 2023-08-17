@@ -30,8 +30,8 @@ class PaymentAuthenticationService
             }
             return false;
         } catch (\Throwable $exception) {
-            Log::log('authentication failed -------------------       ' . env('ACCESS_KEY'));
-            Log::log('authentication failed -------------------       ' . env('SECRET_KEY'));
+            Log::alert('authentication failed -------------------       ' . env('ACCESS_KEY'));
+            Log::alert('authentication failed -------------------       ' . env('SECRET_KEY'));
             return false;
         }
     }

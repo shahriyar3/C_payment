@@ -18,7 +18,7 @@ class VerifyController extends Controller
             $payment->update([
                 'status' => 'failed'
             ]);
-            Log::log('1111111111111111111111111');
+            Log::alert('1111111111111111111111111');
             return redirect()->route('alert', ['text' => 'gateway_error']);
         }
 
@@ -27,7 +27,7 @@ class VerifyController extends Controller
             $payment->update([
                 'status' => 'failed'
             ]);
-            Log::log('1111111111111111111111111');
+            Log::alert('1111111111111111111111111');
             return redirect()->route('alert', ['text' => 'gateway_error']);
         }
 
