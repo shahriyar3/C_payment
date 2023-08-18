@@ -30,8 +30,6 @@ class PaymentAuthenticationService
             }
             return false;
         } catch (\Throwable $exception) {
-            Log::alert('authentication failed -------------------       ' . config('payment.access_key'));
-            Log::alert('authentication failed -------------------       ' . config('payment.secret_key'));
             return false;
         }
     }
