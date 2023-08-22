@@ -10,7 +10,8 @@ class PriceController extends Controller
 {
     public function index()
     {
-        return view('admin.prices.index');
+        $prices = Price::query()->get();
+        return view('admin.prices.index', compact('prices'));
     }
 
     public function create()
