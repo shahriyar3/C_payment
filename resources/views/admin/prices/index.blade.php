@@ -54,7 +54,7 @@
                                     <tr class="odd">
                                         <td class="sorting_1">{{ $price->id }}</td>
                                         <td>{{ $price->price }}</td>
-                                        <td>{{ route('upcadmin.remove', $price) }}</td>
+                                        <td><a href="{{ route('upcadmin.remove', $price) }}"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                 @endforeach
 
