@@ -31,6 +31,7 @@ Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'login
 
 Route::prefix('upcadmin')->name('upcadmin.')->middleware('auth')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('prices/{price}/remove', [\App\Http\Controllers\Admin\PriceController::class, 'remove'])->name('remove');
     Route::resource('prices', \App\Http\Controllers\Admin\PriceController::class)->except(['update', 'show', 'edit']);
     Route::resource('payments', \App\Http\Controllers\Admin\PaymentController::class);
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);

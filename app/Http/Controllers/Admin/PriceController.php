@@ -31,4 +31,10 @@ class PriceController extends Controller
         return redirect()->to(route('upcadmin.prices.index'));
 
     }
+
+    public function remove(Price $price)
+    {
+        $price->delete();
+        return back();
+    }
 }
