@@ -35,4 +35,6 @@ Route::prefix('upcadmin')->name('upcadmin.')->middleware('auth')->group(function
     Route::resource('prices', \App\Http\Controllers\Admin\PriceController::class)->except(['update', 'show', 'edit']);
     Route::resource('payments', \App\Http\Controllers\Admin\PaymentController::class);
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::get('active-payment', [\App\Http\Controllers\Admin\ActivePaymentController::class, 'index'])->name('acive_payment');
+    Route::post('active-payment', [\App\Http\Controllers\Admin\ActivePaymentController::class, 'store'])->name('store_active_payment');
 });
