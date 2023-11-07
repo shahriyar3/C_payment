@@ -21,7 +21,13 @@ Route::get('artisan-call', function () {
 });
 
 Route::get('payment-form/{token}', [\App\Http\Controllers\PaymentFormController::class, 'showPaymentForm'])->name('show_payment_form');
+
+//kenzo
 Route::get('payment/callback', [\App\Http\Controllers\VerifyController::class, 'verify'])->name('verify_payment');
+
+//irgate
+Route::get('payment/gateway-callback', [\App\Http\Controllers\VerifyController::class, 'irGateVerify'])->name('ir_gate_verify');
+
 Route::post('payment', [\App\Http\Controllers\StorePaymentController::class, 'store'])->name('store_payment');
 Route::get('alert/{text}/{token?}', [\App\Http\Controllers\AlertController::class, 'show'])->name('alert');
 
