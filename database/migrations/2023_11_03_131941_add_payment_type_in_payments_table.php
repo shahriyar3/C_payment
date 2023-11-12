@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             $table->enum('payment_type', [Payment::IRGATE->value, Payment::KENZO->value])
                 ->default(Payment::KENZO->value);
+            $table->string('secret')->nullable();
         });
     }
 

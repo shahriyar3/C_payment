@@ -25,7 +25,8 @@ class Payment extends Model
         'result',
         'user_ip',
         'user_agent',
-        'payment_type'
+        'payment_type',
+        'secret'
     ];
 
     protected $casts = [

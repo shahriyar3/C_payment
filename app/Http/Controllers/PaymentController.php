@@ -13,7 +13,8 @@ class PaymentController extends Controller
     public function getToken(Request $request)
     {
         $values = json_decode(base64_decode(urldecode($request->get('token'))));
-        $payment_id = uniqid(time(), true);
+        $payment_id = time();
+        sleep(1);
         $active_payment = Setting::query()->where('name', '=', 'active_payment')->value('value');
         Payment::query()->create([
             'user_id' => $values->userId,
