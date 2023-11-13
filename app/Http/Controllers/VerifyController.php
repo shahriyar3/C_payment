@@ -50,33 +50,27 @@ class VerifyController extends Controller
     public function gatewayTracking()
     {
         $payment = Payment::query()
-            ->where('transaction_id', '=', \request('token', '123'))
-            ->firstOrFail();
+            ->where('payment_id', '=', \request('order_id', '123'))
+            ->first();
 
+        Log::debug(json_encode($payment), request()->all());
         $hash = sha1(sha1($payment->secret . ":" . $payment->order_id . ":" . $payment->transaction_id . ":" . $payment->amount));
-        Log::debug(request()->all());
         if($hash == request('hash') and request('code') == 1){
             $payment->update(['status' => 'success', 'result' => request()->all()]);
             app(PaymentDepositListenerService::class)->handle($payment);
         }
+        $payment->update(['status' => 'failed', 'result' => request()->all()]);
     }
 
     public function irGateVerify()
     {
         $payment = Payment::query()
-            ->where('transaction_id', '=', \request('transaction_id'))
+            ->where('payment_id', '=', \request('token'))
             ->firstOrFail();
 
-        $hash = sha1(sha1($payment->secret . ":" . $payment->order_id . ":" . $payment->transaction_id . ":" . $payment->amount));
-        if($hash == request('hash') and request('code') == 1){
-            $payment->update(['status' => 'success', 'result' => request()->all()]);
+        if($payment->status == 'success'){
             return redirect()->route('alert', ['text' => 'success', 'token' => $payment->payment_id]);
         }
-
-        $payment->update([
-            'status' => 'failed',
-            'result' => json_encode(request()->all())
-        ]);
 
         return redirect()->route('alert', ['text' => 'gateway_error']);
     }
