@@ -67,6 +67,6 @@ class StorePaymentController extends Controller
            ]);
             return redirect($result->msg);
         }
-        abort(500);
+        abort(404);
     }
 }
