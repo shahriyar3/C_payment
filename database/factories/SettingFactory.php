@@ -19,7 +19,7 @@ class SettingFactory extends Factory
     {
         return [
             'name' => 'active_payment',
-            'value' => Payment::IRGATE
+            'value' => Payment::IRGATE->value
         ];
     }
 }
