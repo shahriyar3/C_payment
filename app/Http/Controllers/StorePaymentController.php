@@ -59,7 +59,7 @@ class StorePaymentController extends Controller
             "datetime" => time(),
             "order_id" => (int) $payment->payment_id
         ]);
-        dd($result);
+
         $result = json_decode($result->body());
         if($result?->code == 1){
            $payment->update([
