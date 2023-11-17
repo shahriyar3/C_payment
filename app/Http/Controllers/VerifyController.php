@@ -55,7 +55,7 @@ class VerifyController extends Controller
 
         Log::debug('====== gateway tracking =========');
         Log::debug(json_encode(request()->all()));
-        $hash = sha1(sha1($payment->secret . ":" . $payment->order_id . ":" . $payment->transaction_id . ":" . $payment->amount));
+        $hash = sha1(sha1($payment->secret . ":" . $payment->payment_id . ":" . request('transaction_id') . ":" . $payment->amount));
         Log::debug('================ request hash ============== ' . request('hash'));
         Log::debug('========================= hash ================== ' . $hash);
         if($hash == request('hash') and (int)request('code') == 1){
