@@ -61,9 +61,10 @@ class VerifyController extends Controller
         if($hash == request('hash') and (int)request('code') == 1){
             $payment->update(['status' => 'success', 'result' => request()->all()]);
             app(PaymentDepositListenerService::class)->handle($payment);
-            return true;
+        } else {
+            $payment->update(['status' => 'failed', 'result' => request()->all()]);
         }
-        $payment->update(['status' => 'failed', 'result' => request()->all()]);
+        return true;
     }
 
     public function irGateVerify()
