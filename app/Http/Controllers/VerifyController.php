@@ -53,11 +53,7 @@ class VerifyController extends Controller
             ->where('payment_id', '=', \request('order_id', '123'))
             ->first();
 
-        Log::debug('====== gateway tracking =========');
-        Log::debug(json_encode(request()->all()));
         $hash = sha1(sha1($payment->secret . ":" . $payment->payment_id . ":" . request('transaction_id') . ":" . $payment->amount));
-        Log::debug('================ request hash ============== ' . request('hash'));
-        Log::debug('========================= hash ================== ' . $hash);
         if($hash == request('hash') and (int)request('code') == 1){
             $payment->update(['status' => 'success', 'result' => request()->all()]);
             app(PaymentDepositListenerService::class)->handle($payment);
@@ -70,10 +66,6 @@ class VerifyController extends Controller
         $payment = Payment::query()
             ->where('payment_id', '=', \request('token'))
             ->firstOrFail();
-
-        Log::debug('====== ir gate verify =========');
-        Log::debug(json_encode($payment));
-        Log::debug(json_encode(request()->all()));
 
         if($payment->status == 'success'){
             return redirect()->route('alert', ['text' => 'success', 'token' => $payment->payment_id]);
