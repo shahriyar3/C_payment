@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
-use App\Models\Setting;
 use App\Services\PaymentAuthenticationService;
 use App\Services\PaymentDepositListenerService;
 use App\Services\PaymentVerifyService;
-use Illuminate\Support\Facades\Log;
 
 class VerifyController extends Controller
 {
@@ -54,10 +52,6 @@ class VerifyController extends Controller
             ->first();
 
         $hash = sha1(sha1($payment->secret . ":" . $payment->payment_id . ":" . request('transaction_id') . ":" . $payment->amount));
-        $log = $hash == request('hash');
-        Log::debug($log);
-        Log::debug(' ================================= ');
-        Log::debug((int)request('code') == 1);
         if($hash == request('hash') and (int)request('code') == 1){
             $payment->update(['status' => 'success', 'result' => request()->all()]);
             app(PaymentDepositListenerService::class)->handle($payment);
