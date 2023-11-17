@@ -48,8 +48,8 @@ class StorePaymentController extends Controller
         $base_url = config('irgate.base_url');
         $result = Http::asForm()->post($base_url . 'api/deposit', [
             "api_key" => config('irgate.irgate_token'),
-            "redirect_url" => config('app.url') . "/payment/gateway-callback?callback=true&language=fa&token=" . $payment->payment_id,
-            "result_url" => config('app.url') . "/gateway-tracking?callback=result&language=fa",
+            "redirect_url" => config('app.url') . "payment/gateway-callback?callback=true&language=fa&token=" . $payment->payment_id,
+            "result_url" => config('app.url') . "api/gateway-tracking?callback=result&language=fa",
             "amount" => $payment->amount,
             "payment_currency" => 'IRT',
             "return_currency" => 'IRT',
@@ -59,7 +59,7 @@ class StorePaymentController extends Controller
             "datetime" => time(),
             "order_id" => (int) $payment->payment_id
         ]);
-
+        dd($result);
         $result = json_decode($result->body());
         if($result?->code == 1){
            $payment->update([
