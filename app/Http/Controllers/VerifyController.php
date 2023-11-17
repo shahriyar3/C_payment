@@ -54,6 +54,10 @@ class VerifyController extends Controller
             ->first();
 
         $hash = sha1(sha1($payment->secret . ":" . $payment->payment_id . ":" . request('transaction_id') . ":" . $payment->amount));
+        $log = $hash == request('hash');
+        Log::debug($log);
+        Log::debug(' ================================= ');
+        Log::debug((int)request('code') == 1);
         if($hash == request('hash') and (int)request('code') == 1){
             $payment->update(['status' => 'success', 'result' => request()->all()]);
             app(PaymentDepositListenerService::class)->handle($payment);
