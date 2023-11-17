@@ -54,10 +54,11 @@ class VerifyController extends Controller
             ->first();
 
         Log::debug('====== gateway tracking =========');
-        Log::debug(json_encode($payment));
         Log::debug(json_encode(request()->all()));
         $hash = sha1(sha1($payment->secret . ":" . $payment->order_id . ":" . $payment->transaction_id . ":" . $payment->amount));
-        if($hash == request('hash') and request('code') == 1){
+        Log::debug('================ request hash ============== ' . request('hash'));
+        Log::debug('========================= hash ================== ' . $hash);
+        if($hash == request('hash') and (int)request('code') == 1){
             $payment->update(['status' => 'success', 'result' => request()->all()]);
             app(PaymentDepositListenerService::class)->handle($payment);
         }
