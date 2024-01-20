@@ -5,5 +5,6 @@ enum Payment: string
 {
     case KENZO = 'KENZO';
     case IRGATE = 'IRGATE';
+    case VODAPAY = 'VODAPAY';
 
 }
