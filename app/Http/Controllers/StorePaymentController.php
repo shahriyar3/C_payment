@@ -18,10 +18,11 @@ class StorePaymentController extends Controller
         $payment->update(['amount' => $request->amount]);
 
         $active_payment = Setting::query()->where('name', '=', 'active_payment')->value('value');
-
+        $active_payment = \App\Enum\Payment::VODAPAY->value;
         return match ($active_payment) {
             \App\Enum\Payment::KENZO->value => $this->kenzo($payment),
-            \App\Enum\Payment::IRGATE->value => $this->irgate($payment)
+            \App\Enum\Payment::IRGATE->value => $this->irgate($payment),
+            \App\Enum\Payment::VODAPAY->value => $this->voda($payment),
         };
 
     }
@@ -57,14 +58,51 @@ class StorePaymentController extends Controller
             "email" => "$payment->user_name",
             "description" => $payment->user_id,
             "datetime" => time(),
-            "order_id" => (int) $payment->payment_id
+            "order_id" => (int)$payment->payment_id
         ]);
 
         $result = json_decode($result->body());
-        if($result?->code == 1){
-           $payment->update([
-               'secret' => $result?->secret
-           ]);
+        if ($result?->code == 1) {
+            $payment->update([
+                'secret' => $result?->secret
+            ]);
+            return redirect($result->msg);
+        }
+        abort(404);
+    }
+
+    private function voda($payment)
+    {
+        $json = json_encode([
+            "Amount" => 100000,
+            "currency" => "TOM",
+            "customData1" => "customData1",
+            "customData2" => "customData2",
+            "callBackUrl" => "your callBackUrl",
+            "cancelUrl" => "your cancelUr",
+            "directNotifyUrl" => "your directNotifyUrl",
+        ]);
+
+        $string = md5($json . config('vodapay.privatekey'));
+
+        $base_url = config('vodapay.base_url');
+        $result = Http::asForm()->post($base_url, [
+            'authKey' => config('vodapay.authKey'),
+            'privateKey' => config('vodapay.privatekey'),
+            "Amount" => (int)$payment->amount,
+            "currency" => "TOM",
+            "customData1" => $payment->payment_id,
+            "customData2" => $payment->user_id,
+            "callBackUrl" => config('vodapay.callback_url'),
+            "cancelUrl" => config('cancel_url'),
+            "directNotifyUrl" => config('vodapay.callback_url'),
+        ]);
+        dd($result->body());
+        $result = json_decode($result->body());
+        if ($result?->code == 1) {
+            $payment->update([
+                'secret' => $result?->secret
+            ]);
             return redirect($result->msg);
         }
         abort(404);

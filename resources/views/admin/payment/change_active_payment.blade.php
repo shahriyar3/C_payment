@@ -29,6 +29,7 @@
                         <select name="active_payment" id="active_payment" class="form-control">
                             <option value="KENZO" @selected('KENZO' == $active_payment)>kenzo</option>
                             <option value="IRGATE" @selected('IRGATE' == $active_payment)>irgate</option>
+                            <option value="VODA" @selected('VODA' == $active_payment)>voda</option>
                         </select>
                     </div>
 
