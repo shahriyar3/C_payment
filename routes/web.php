@@ -35,6 +35,8 @@ Route::get('upc-login', [\App\Http\Controllers\Auth\LoginController::class, 'sho
 Route::post('upc-login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('logout');
 
+Route::get('url-select', [\App\Http\Controllers\UrlController::class, 'show'])->name('url-show');
+
 Route::prefix('upcadmin')->name('upcadmin.')->middleware('auth')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('prices/{price}/remove', [\App\Http\Controllers\Admin\PriceController::class, 'remove'])->name('remove');
@@ -43,4 +45,6 @@ Route::prefix('upcadmin')->name('upcadmin.')->middleware('auth')->group(function
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::get('active-payment', [\App\Http\Controllers\Admin\ActivePaymentController::class, 'index'])->name('acive_payment');
     Route::post('active-payment', [\App\Http\Controllers\Admin\ActivePaymentController::class, 'store'])->name('store_active_payment');
+
+    Route::get('url-select', [\App\Http\Controllers\Admin\UrlSelectController::class, 'index'])->name('url_slect_index');
 });
