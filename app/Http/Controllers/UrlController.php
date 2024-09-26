@@ -9,7 +9,7 @@ class UrlController extends Controller
     public function show()
     {
         try{
-            return response()->download(storage_path('storage/url.txt'), 'new_url.txt');
+            return response()->download(storage_path('url.txt'), 'new_url.txt');
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
         }
