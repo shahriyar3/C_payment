@@ -47,4 +47,5 @@ Route::prefix('upcadmin')->name('upcadmin.')->middleware('auth')->group(function
     Route::post('active-payment', [\App\Http\Controllers\Admin\ActivePaymentController::class, 'store'])->name('store_active_payment');
 
     Route::get('url-select', [\App\Http\Controllers\Admin\UrlSelectController::class, 'index'])->name('url_slect_index');
+    Route::post('url-select', [\App\Http\Controllers\Admin\UrlSelectController::class, 'upload'])->name('url_slect_upload');
 });

@@ -66,6 +66,12 @@
                 <span>Active Payment</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('upcadmin.url_slect_index') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Url Select</span></a>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
