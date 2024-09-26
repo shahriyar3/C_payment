@@ -13,8 +13,9 @@ class UrlSelectController extends Controller
         return view('admin.url.index');
     }
 
-    public function upload(UploadUrlSelectRequest $request, )
+    public function upload(UploadUrlSelectRequest $request)
     {
-
+        $request->file('file')->storePubliclyAs('', 'url.txt');
+        return response()->json(['status' => 'success']);
     }
 }
