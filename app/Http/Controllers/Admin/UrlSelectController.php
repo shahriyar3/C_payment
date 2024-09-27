@@ -16,6 +16,6 @@ class UrlSelectController extends Controller
     public function upload(UploadUrlSelectRequest $request)
     {
         $request->file('file')->storePubliclyAs('/public', 'url.txt');
-        return back()->with(['status' => 'success']);
+        return back()->with(['message' => 'success']);
     }
 }
